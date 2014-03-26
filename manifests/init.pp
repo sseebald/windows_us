@@ -1,26 +1,24 @@
-class windows_us ($wuserver = undef, $wustatusserver = undef){
+class windows_us ($wuserver, $wustatusserver){
 
   ###############################     Settings for Windows Update     ##############################
 
   registry::value {'Enable Windows Update':
     key   => 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate',
     value => DisableWindowsUpdateAccess,
-    data  => 0, #1 = Disable WU, 0 = Enable WU
+    data  => 1, #1 = Disable WU, 0 = Enable WU
     type  => dword,
   }
 
   registry::value {'Set Windows Update Server':
     key   => 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate',
     value => WUServer,
-    data  => $WUServer,
-    type  => string,
+    data  => "${wuserver}",
   }
 
   registry::value {'Set Windows Update Status Server':
     key   => 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate',
     value => WUStatusServer,
-    data  => $WUStatusServer,
-    type  => string,
+    data  => "${wustatusserver}",
   }
 
   ################################ Settings for Windows Auto Updates ###############################
