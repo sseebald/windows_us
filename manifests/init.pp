@@ -1,4 +1,4 @@
-class windows_us ($WUServer, $WUStatusServer){
+class windows_us ($wuserver = undef, $wustatusserver = undef){
 
   ###############################     Settings for Windows Update     ##############################
 
@@ -21,13 +21,6 @@ class windows_us ($WUServer, $WUStatusServer){
     value => WUStatusServer,
     data  => $WUStatusServer,
     type  => string,
-  }
-
-  registry::value {'Completely disable access to WU':
-    key   => 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate',
-    value => DisableWindowsUpdateAccess,
-    data  => 1, #1 = Disable, 0 = Enable
-    type  => dword,
   }
 
   ################################ Settings for Windows Auto Updates ###############################
