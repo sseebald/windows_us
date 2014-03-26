@@ -1,4 +1,4 @@
-class windows_us {
+class windows_us ($WUServer, $WUStatusServer){
 
   ###############################     Settings for Windows Update     ##############################
 
@@ -12,14 +12,14 @@ class windows_us {
   registry::value {'Set Windows Update Server':
     key   => 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate',
     value => WUServer,
-    data  => 'https://localhost',
+    data  => $WUServer,
     type  => string,
   }
 
   registry::value {'Set Windows Update Status Server':
     key   => 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate',
     value => WUStatusServer,
-    data  => 'https://localhost',
+    data  => $WUStatusServer,
     type  => string,
   }
 
